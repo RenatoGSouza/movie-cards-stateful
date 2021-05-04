@@ -33,10 +33,6 @@ class MovieLibrary extends Component {
       this.setState({
         movies: movies.filter(({ title }) => title.toUpperCase()
           .includes(value.toUpperCase())) });
-      this.setState((oldMovies) => ({
-        movies: [...oldMovies, ...movies.filter(({ subtitle }) => subtitle.toUpperCase()
-          .includes(value.toUpperCase()))],
-      }));
     }
   }
 
