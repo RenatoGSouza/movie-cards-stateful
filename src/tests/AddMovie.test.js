@@ -212,6 +212,7 @@ describe('14 - Renderize um botão do formulário em `<AddMovie />` para fazer u
   it('Será validado se o evento onClick é chamado ao se clicar no botão.', () => {
     event.type(titleInput, movieHarryPotter);
     event.type(subtitleInput, subtitleMagical);
+
     fireEvent.change(storylineInput, { target: { value: `${inputStoryline}` } });
     event.type(storylineInput, inputStoryline);
     event.type(ratingInput, '3.5');
