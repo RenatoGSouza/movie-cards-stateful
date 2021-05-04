@@ -16,11 +16,12 @@ class AddMovie extends Component {
 
   handleInput = ({ target: { value, id } }) => {
     this.setState({ [id]: value });
-    console.log(value);
+    console.log(id, value);
   }
 
   handleSelect= ({ target: { value, id } }) => {
     this.setState({ [id]: value });
+    console.log(id, value);
   }
 
   createInput = (value, nameLabel, id, type) => (
@@ -74,7 +75,7 @@ class AddMovie extends Component {
       type="button"
       id="btn"
       onClick={ () => {
-        click();
+        click(this.state);
         this.setState({
           subtitle: '',
           title: '',

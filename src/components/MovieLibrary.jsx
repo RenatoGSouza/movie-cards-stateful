@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import SearchBar from './SearchBar';
 import MovieList from './MovieList';
+import AddMovie from './AddMovie';
 
 class MovieLibrary extends Component {
   constructor(props) {
@@ -16,53 +17,34 @@ class MovieLibrary extends Component {
 
   onBookmarkedChange = ({ target: { checked } }) => {
     this.setState({ bookmarkedOnly: checked });
-    const { movies } = this.props;
-    if (!checked) {
-      this.setState({ movies });
-    } else {
-      this.setState({ movies: movies.filter((movie) => movie.bookmarked === checked) });
-    }
   }
 
   onSearchTextChange = ({ target: { value } }) => {
     this.setState({ searchText: value });
-    const { movies } = this.props;
-    if (value === '') {
-      this.setState({ movies });
-    } else {
-      this.setState({
-        movies: movies.filter(({ title }) => title.toUpperCase()
-          .includes(value.toUpperCase())) });
-    }
   }
 
   onSelectedGenreChange = ({ target: { value } }) => {
     this.setState({ selectedGenre: value });
-    const { movies } = this.props;
-    if (value === '') {
-      this.setState({ movies });
-    } else {
-      this.setState({ movies: movies.filter((movie) => movie.genre === value) });
-    }
   }
 
-  // filterText = () => {
-  //   const { searchText } = this.state;
-  //   this.setState({ movies: movies.filter((movie) => movie.title === searchText) });
-  // }
-
-  // filterGenre = () => {
-  //   const { selectedGenre, movies: filmes } = this.state;
-  //   if (selectedGenre === '') {
-  //     this.setState({ movies });
-  //   }
-  //   this.setState({ movies: filmes.filter((movie) => movie.genre === selectedGenre),
-  //   });
-  // }
+  newCardMovie = (movie) => {
+    this.setState((oldMovies) => ({ movies: [...oldMovies.movies, movie] }));
+  }
 
   render() {
     const { searchText, movies: filmes, bookmarkedOnly, selectedGenre } = this.state;
 
+    const filterText = filmes
+      .filter(({ title, subtitle, storyline }) => (
+        title.toUpperCase().includes(searchText.toUpperCase())
+      || subtitle.toUpperCase().includes(searchText.toUpperCase())
+      || storyline.toUpperCase().includes(searchText.toUpperCase())));
+
+    const filterMarked = filterText
+      .filter((movie) => ((bookmarkedOnly === false) ? true : movie.bookmarked));
+
+    const filterGenre = filterMarked
+      .filter((movie) => movie.genre.includes(selectedGenre));
     return (
       <div>
         <SearchBar
@@ -73,7 +55,8 @@ class MovieLibrary extends Component {
           selectedGenre={ selectedGenre }
           onSelectedGenreChange={ this.onSelectedGenreChange }
         />
-        <MovieList movies={ filmes } />
+        <MovieList movies={ filterGenre } />
+        <AddMovie onClick={ this.newCardMovie } />
       </div>
     );
   }
