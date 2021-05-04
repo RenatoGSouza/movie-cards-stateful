@@ -1,8 +1,26 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import MovieList from './MovieList';
 
 class SearchBar extends Component {
+  createSelect = (selectedGenre, onSelectedGenreChange) => (
+    <select
+      value={ selectedGenre }
+      onChange={ onSelectedGenreChange }
+      name=""
+      id="selectedGenre"
+      data-testid="select-input"
+    >
+      <option data-testid="select-option" value="">Todos</option>
+      <option data-testid="select-option" value="action">Ação</option>
+      <option data-testid="select-option" value="comedy">Comédia</option>
+      <option data-testid="select-option" value="thriller">Suspense</option>
+    </select>
+  )
+
+  filterMovie = () => {
+
+  }
+
   render() {
     const { searchText,
       onSearchTextChange,
@@ -10,7 +28,6 @@ class SearchBar extends Component {
       onBookmarkedChange,
       selectedGenre,
       onSelectedGenreChange,
-      movies,
     } = this.props;
     return (
       <form data-testid="search-bar-form">
@@ -36,20 +53,8 @@ class SearchBar extends Component {
         </label>
         <label htmlFor="genero" data-testid="select-input-label">
           Filtrar por gênero
-          <select
-            value={ selectedGenre }
-            onChange={ onSelectedGenreChange }
-            name=""
-            id="genero"
-            data-testid="select-input"
-          >
-            <option data-testid="select-option" value="">Todos</option>
-            <option data-testid="select-option" value="action">Ação</option>
-            <option data-testid="select-option" value="comedy">Comédia</option>
-            <option data-testid="select-option" value="thriller">Suspense</option>
-          </select>
+          {this.createSelect(selectedGenre, onSelectedGenreChange)}
         </label>
-        <MovieList movies={ movies } />
       </form>
     );
   }
@@ -62,7 +67,6 @@ SearchBar.propTypes = {
   onBookmarkedChange: PropTypes.func,
   selectedGenre: PropTypes.string,
   onSelectedGenreChange: PropTypes.func,
-  movies: PropTypes.arrayOf(Object),
 };
 SearchBar.defaultProps = {
   searchText: '',
@@ -71,7 +75,6 @@ SearchBar.defaultProps = {
   onBookmarkedChange: () => {},
   selectedGenre: '',
   onSelectedGenreChange: () => {},
-  movies: [],
 };
 
 export default SearchBar;
