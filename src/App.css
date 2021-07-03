@@ -6,16 +6,18 @@ body {
 
 .movie-card-header {
   align-items: center;
-  background-color: #343a40;
+  background-color: black;
   display: flex;
   height: 100px;
   justify-content: center;
 }
 
 .page-title {
-  color: #f8f9fa;
-  font-size: 28px;
-  font-weight: 500;
+  align-items: center;
+  color: #b81010;
+  font-family: Martel Sans , sans-serif;
+  font-size: 40px;
+  font-weight: 700;
   text-align: center;
 }
 
@@ -80,4 +82,52 @@ body {
   display: flex;
   justify-content: flex-end;
   padding: 12px 20px;
+}
+
+.search-bar {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 5px;
+}
+
+.add-movie {
+  align-items: center;
+  background-color: black;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: right;
+  padding: 10px;
+}
+
+.add-movie input {
+  margin: 5px;
+}
+
+.add-movie div {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  margin: 5px;
+}
+
+.add-movie div section {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 5px;
+}
+
+.storyline {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 1px 1px 1px #999;
+  line-height: 1.5;
+  max-width: 100%;
+  padding: 10px;
+  resize: none;
+  text-align: start;
 }

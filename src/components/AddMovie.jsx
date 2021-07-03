@@ -16,12 +16,10 @@ class AddMovie extends Component {
 
   handleInput = ({ target: { value, id } }) => {
     this.setState({ [id]: value });
-    console.log(id, value);
   }
 
   handleSelect= ({ target: { value, id } }) => {
     this.setState({ [id]: value });
-    console.log(id, value);
   }
 
   createInput = (value, nameLabel, id, type) => (
@@ -39,10 +37,11 @@ class AddMovie extends Component {
       data-testid="storyline-input"
       name="sinopse"
       id="storyline"
+      className="storyline"
       value={ storyline }
       onChange={ this.handleInput }
       cols="30"
-      rows="10"
+      rows="3"
     />
   )
 
@@ -96,31 +95,37 @@ class AddMovie extends Component {
     const { subtitle, title, imagePath, rating, genre, storyline } = this.state;
     const { onClick } = this.props;
     return (
-      <form action="" data-testid="add-movie-form">
-        <label htmlFor="title" data-testid="title-input-label">
-          Título
-          {this.createInput(title, 'title', 'title', 'text')}
-        </label>
-        <label htmlFor="subTitle" data-testid="subtitle-input-label">
-          Subtítulo
-          {this.createInput(subtitle, 'subtitle', 'subtitle', 'text')}
-        </label>
-        <label htmlFor="img" data-testid="image-input-label">
-          Imagem
-          {this.createInput(imagePath, 'image', 'imagePath', 'text')}
-        </label>
-        <label htmlFor="sinopse" data-testid="storyline-input-label">
-          Sinopse
-          {this.createTextArea(storyline)}
-        </label>
-        <label htmlFor="rating" data-testid="rating-input-label">
-          Avaliação
-          {this.createInput(rating, 'rating', 'rating', 'number')}
-        </label>
-        <label htmlFor="select" data-testid="genre-input-label">
-          Gênero
-          {this.createSelect(genre)}
-        </label>
+      <form action="" data-testid="add-movie-form" className="add-movie">
+        <div>
+          <label htmlFor="title" data-testid="title-input-label">
+            Título
+            {this.createInput(title, 'title', 'title', 'text')}
+          </label>
+          <label htmlFor="subTitle" data-testid="subtitle-input-label">
+            Subtítulo
+            {this.createInput(subtitle, 'subtitle', 'subtitle', 'text')}
+          </label>
+          <label htmlFor="img" data-testid="image-input-label">
+            Imagem
+            {this.createInput(imagePath, 'image', 'imagePath', 'text')}
+          </label>
+        </div>
+        <div>
+          <label htmlFor="sinopse" data-testid="storyline-input-label">
+            Sinopse
+            {this.createTextArea(storyline)}
+          </label>
+          <section>
+            <label htmlFor="rating" data-testid="rating-input-label">
+              Avaliação
+              {this.createInput(rating, 'rating', 'rating', 'number')}
+            </label>
+            <label htmlFor="select" data-testid="genre-input-label">
+              Gênero
+              {this.createSelect(genre)}
+            </label>
+          </section>
+        </div>
         {this.createButton(onClick)}
       </form>
     );
